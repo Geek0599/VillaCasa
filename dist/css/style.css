@@ -1304,15 +1304,15 @@ body::after {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@supports (gap: clamp( 2.8125rem , 2.365419708rem  +  1.4598540146vw , 4.0625rem )) {
+@supports (gap: clamp( 2.5rem , 1.941149635rem  +  1.8248175182vw , 4.0625rem )) {
   .menu-quick-links__columns {
-    gap: clamp( 2.8125rem , 2.365419708rem  +  1.4598540146vw , 4.0625rem );
+    gap: clamp( 2.5rem , 1.941149635rem  +  1.8248175182vw , 4.0625rem );
   }
 }
 
-@supports not (gap: clamp( 2.8125rem , 2.365419708rem  +  1.4598540146vw , 4.0625rem )) {
+@supports not (gap: clamp( 2.5rem , 1.941149635rem  +  1.8248175182vw , 4.0625rem )) {
   .menu-quick-links__columns {
-    gap: calc(2.8125rem + 1.25 * (100vw - 30.625rem) / 85.625);
+    gap: calc(2.5rem + 1.5625 * (100vw - 30.625rem) / 85.625);
   }
 }
 
@@ -1333,21 +1333,10 @@ body::after {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  gap: 2.1875rem;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: start;
-}
-
-@supports (gap: clamp( 2.1875rem , 2.1875rem  +  0vw , 2.1875rem )) {
-  .menu-quick-links__column {
-    gap: clamp( 2.1875rem , 2.1875rem  +  0vw , 2.1875rem );
-  }
-}
-
-@supports not (gap: clamp( 2.1875rem , 2.1875rem  +  0vw , 2.1875rem )) {
-  .menu-quick-links__column {
-    gap: calc(2.1875rem + 0 * (100vw - 30.625rem) / 85.625);
-  }
 }
 
 .item-quick-links__title {
@@ -1385,7 +1374,6 @@ body::after {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(100 - 1.5rem);
   max-width: 80%;
   display: -ms-inline-grid;
   display: inline-grid;
@@ -6397,6 +6385,10 @@ html.with-fancybox body.hide-scrollbar {
   .menu-quick-links__columns {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+  }
+
+  .menu-quick-links__column {
+    gap: 2.5rem;
   }
 
   .map {
