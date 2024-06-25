@@ -9529,6 +9529,7 @@
     window.addEventListener("click", (e => {
         openHideSearchForm(e);
         checkRadioLocation(e);
+        openHideQuickLinks(e);
     }));
     function toggleBtn() {
         const toggleBtns = document.querySelectorAll("[data-toggle]");
@@ -9621,6 +9622,49 @@
         }));
     }
     checkboxRadioChecked();
+    function goToTopBtn() {
+        const btnGoUp = document.querySelector(".btn-go-up");
+        if (btnGoUp) {
+            const startPoint = btnGoUp.dataset.showAfter ? btnGoUp.dataset.showAfter : 100;
+            setTimeout((() => {
+                window.addEventListener("scroll", (function(e) {
+                    const scrollTop = window.scrollY;
+                    if (scrollTop >= startPoint) !btnGoUp.classList.contains("_show") ? btnGoUp.classList.add("_show") : null; else btnGoUp.classList.contains("_show") ? btnGoUp.classList.remove("_show") : null;
+                }));
+                btnGoUp.addEventListener("click", (e => {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth"
+                    });
+                }));
+            }), 0);
+        }
+    }
+    goToTopBtn();
+    function openHideQuickLinks(e) {
+        if (e.target.closest(".quick-links__btn")) {
+            const quickLinksMenu = document.querySelector(".menu-quick-links");
+            if (quickLinksMenu) {
+                quickLinksMenu.classList.add("_open");
+                quickLinksMenu.removeAttribute("aria-hidden");
+                quickLinksMenu.querySelectorAll("a, button").forEach((function(item) {
+                    item.setAttribute("tabindex", "0");
+                }));
+                bodyLock();
+            }
+        } else if (e.target.closest(".menu-quick-links__btn-close") || !e.target.closest(".menu-quick-links__body")) {
+            const quickLinksMenu = document.querySelector(".menu-quick-links");
+            if (quickLinksMenu) {
+                quickLinksMenu.classList.remove("_open");
+                quickLinksMenu.setAttribute("aria-hidden", "true");
+                quickLinksMenu.querySelectorAll("a, button").forEach((function(item) {
+                    item.setAttribute("tabindex", "-1");
+                }));
+                bodyUnlock();
+            }
+        }
+    }
     isWebp();
     addLoadedClass();
     menuInit();
