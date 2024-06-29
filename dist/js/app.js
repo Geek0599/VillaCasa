@@ -107,9 +107,10 @@
             setTimeout((() => {
                 for (let index = 0; index < lock_padding.length; index++) {
                     const el = lock_padding[index];
-                    el.style.paddingRight = "0px";
+                    el.style.removeProperty("padding-right");
                 }
-                body.style.paddingRight = "0px";
+                body.style.removeProperty("padding-right");
+                document.documentElement.style.removeProperty("--calc-scrollbar-compensate");
                 document.documentElement.classList.remove("lock");
             }), delay);
             bodyLockStatus = false;
@@ -122,12 +123,14 @@
         let body = document.querySelector("body");
         if (bodyLockStatus) {
             let lock_padding = document.querySelectorAll("[data-lp]");
+            const calcCompensate = window.innerWidth - document.querySelector(".wrapper").offsetWidth + "px";
             for (let index = 0; index < lock_padding.length; index++) {
                 const el = lock_padding[index];
-                el.style.paddingRight = window.innerWidth - document.querySelector(".wrapper").offsetWidth + "px";
+                el.style.paddingRight = calcCompensate;
             }
-            body.style.paddingRight = window.innerWidth - document.querySelector(".wrapper").offsetWidth + "px";
+            body.style.paddingRight = calcCompensate;
             document.documentElement.classList.add("lock");
+            document.documentElement.style.setProperty("--calc-scrollbar-compensate", calcCompensate);
             bodyLockStatus = false;
             setTimeout((function() {
                 bodyLockStatus = true;
@@ -569,7 +572,7 @@
         }
         _openToHash() {
             let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
-            const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
+            const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) && classInHash ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : classInHash ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`) : null;
             if (buttons && classInHash) this.open(classInHash);
         }
         _setHash() {
