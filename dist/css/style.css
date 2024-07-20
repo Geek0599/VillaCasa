@@ -891,6 +891,19 @@ body::after {
   top: calc(100% + 0.125rem);
 }
 
+.checkboxes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
 .checkboxes__item:not(:last-child) {
   margin-bottom: 1.4375rem;
 }
@@ -1865,6 +1878,18 @@ body::after {
 
 .pagination__link._active {
   color: #a8172a;
+}
+
+.page__property-cards {
+  padding: 3.75rem 0 1.25rem;
+}
+
+.property-cards__list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
 }
 
 .header {
@@ -5124,6 +5149,7 @@ html.with-fancybox body.hide-scrollbar {
 .fancybox-placeholder {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
   clip-path: inset(50%) !important;
   height: 1px !important;
   margin: -1px !important;
@@ -5278,8 +5304,10 @@ html.with-fancybox body.hide-scrollbar {
 }
 
 .is-modern.is-resting .f-thumbs__slide__button {
-  -webkit-transition: clip-path 0.33s ease;
+  -webkit-transition: -webkit-clip-path 0.33s ease;
+  transition: -webkit-clip-path 0.33s ease;
   transition: clip-path 0.33s ease;
+  transition: clip-path 0.33s ease, -webkit-clip-path 0.33s ease;
 }
 
 .is-using-tab .is-modern .f-thumbs__slide:focus-within {
@@ -5325,7 +5353,8 @@ html.with-fancybox body.hide-scrollbar {
 
 .is-modern .f-thumbs__slide__button {
   --clip-path: inset( 0 calc( ((var(--f-thumb-width, 0) - var(--f-thumb-clip-width, 0))) * (1 - var(--progress, 0)) * 0.5 ) round var(--f-thumb-border-radius, 0) );
-  clip-path: var(--clip-path);
+  -webkit-clip-path: var(--clip-path);
+          clip-path: var(--clip-path);
 }
 
 .is-classic .is-nav-selected .f-thumbs__slide__button {
@@ -5873,6 +5902,19 @@ html.with-fancybox body.hide-scrollbar {
 }
 
 @media (max-width: 75em) {
+  .page__property-cards {
+    padding: 1.875rem 0 0.625rem;
+  }
+
+  .property-cards__list {
+    -webkit-column-gap: 1rem;
+       -moz-column-gap: 1rem;
+            column-gap: 1rem;
+    row-gap: 1.5rem;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
   .page-actions__container {
     display: -ms-grid;
     display: grid;
@@ -6045,6 +6087,10 @@ html.with-fancybox body.hide-scrollbar {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
     display: inline-flex;
+  }
+
+  .page__property-cards {
+    padding: 2.5rem 0 1.25rem;
   }
 
   .property-category__row-property-card.property-card .property-info {
@@ -6389,6 +6435,13 @@ html.with-fancybox body.hide-scrollbar {
 
   .description {
     padding-top: 0.625rem;
+  }
+}
+
+@media (max-width: 54.375em) {
+  .property-cards__list {
+    -ms-grid-columns: auto;
+    grid-template-columns: auto;
   }
 }
 
